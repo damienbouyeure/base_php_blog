@@ -1,6 +1,5 @@
 <?php
 require_once("./header.php");
-$db = connectDB($user, $pass);
 $options = ['cost' => 12];
 if (!empty ($_POST['action'])) {
     $username = htmlentities($_POST['username']);
@@ -8,6 +7,7 @@ if (!empty ($_POST['action'])) {
     $errorSignup = verifyUsername($db, $username);
     if ($errorSignup == FALSE) {
         insertUser($db, $username, $password);
+        redirection('./');
     } else {
         $userExist = ' <div class="row">Nom d\'utilisateur deja existant</div>';
     }

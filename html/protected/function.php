@@ -61,7 +61,7 @@ function userConnect(PDO $db, string $username, string $password)
 
 function viewAllArticle(PDO $db, int $start, int $limit)
 {
-    $sttviewAll = $db->prepare('select a.id, title,content,image,username from articles a left join users u on a.author = u.id limit :start,:limit  ');
+    $sttviewAll = $db->prepare('select a.id, title,content,image,username from articles a left join users u on a.author = u.id order by a.id DESC limit :start,:limit  ');
     $sttviewAll->bindParam(':limit', $limit, PDO::PARAM_INT);
     $sttviewAll->bindParam(':start', $start, PDO::PARAM_INT);
     $sttviewAll->execute();
