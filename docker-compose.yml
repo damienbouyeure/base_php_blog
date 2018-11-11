@@ -1,0 +1,38 @@
+version: '3.7'
+services:
+  web:
+    image: nginx
+    depends_on:
+      - php
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./html:/code
+    ports:
+      - "8080:80"
+  php:
+    build:
+      context: php-fpm
+    depends_on:
+      - database
+    volumes:
+      - ./html:/code
+  database:
+    image: mariadb
+    volumes:
+    - ./html/protected/dump.sql:/docker-entrypoint-initdb.d/dump.sql
+    ports:
+      - "3306:3306"
+    environment:
+    - MYSQL_ROOT_PASSWORD=root
+    - MYSQL_DATABASE=blog
+    - MYSQL_USER=damien
+    - MYSQL_PASSWORD=azerty
+  adminer-nginx:
+    image: adminer
+    depends_on:
+      - database
+    ports:
+      - "8787:8080"
+    environment:
+      - ADMINER_DEFAULT_SERVER=database
+      - ADMINER_DESIGN=brade
