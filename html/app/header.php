@@ -5,7 +5,7 @@ if ($_GET['disconnect'] == 1) {
     session_destroy();
     header("location:./");
 }
-require_once("./protected/function.php");
+require_once("../protected/function.php");
 $db = connectDB($host,$dbName,$user, $pass);
 if (!empty ($_POST['connect'])) {
     $username = $_POST['username'];
@@ -25,7 +25,7 @@ if (!empty ($_POST['connect'])) {
     <script src="https://cdn.jsdelivr.net/jquery.webui-popover/1.2.1/jquery.webui-popover.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="./css/custom.css">
+    <link rel="stylesheet" href="../css/custom.css">
     <link href="https://cdn.jsdelivr.net/jquery.webui-popover/1.2.1/jquery.webui-popover.min.css" rel="stylesheet"/>
 
 

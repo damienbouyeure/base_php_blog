@@ -1,5 +1,5 @@
 <?php
-require_once('./protected/info.php');
+require_once('../protected/info.php');
 
 function connectDB(string $host, string $dbName, string $user, string $pass)
 {
@@ -58,14 +58,18 @@ function userConnect(PDO $db, string $username, string $password)
     }
 
 }
-
+function countArticle (PDO $db)
+{
+    $sttCountArt= $db->query("select count(*) as nbArt from articles");
+    return $sttCountArt->fetch(PDO::FETCH_ASSOC);
+}
 function viewAllArticle(PDO $db, int $start, int $limit)
 {
-    $sttviewAll = $db->prepare('select a.id, title,content,image,username from articles a left join users u on a.author = u.id order by a.id DESC limit :start,:limit  ');
-    $sttviewAll->bindParam(':limit', $limit, PDO::PARAM_INT);
-    $sttviewAll->bindParam(':start', $start, PDO::PARAM_INT);
-    $sttviewAll->execute();
-    $viewAll = $sttviewAll->fetchAll(PDO::FETCH_ASSOC);
+    $sttViewAll = $db->prepare('select a.id, title,content,image,username from articles a left join users u on a.author = u.id order by a.id DESC limit :start,:limit  ');
+    $sttViewAll->bindParam(':limit', $limit, PDO::PARAM_INT);
+    $sttViewAll->bindParam(':start', $start, PDO::PARAM_INT);
+    $sttViewAll->execute();
+    $viewAll = $sttViewAll->fetchAll(PDO::FETCH_ASSOC);
     return (array) $viewAll;
 }
 

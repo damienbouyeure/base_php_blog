@@ -55,9 +55,13 @@ $article = viewAllArticle($db, $start, $limite);
                         class="material-icons">arrow_left</i></a>
 
 
-        <?php } ?>
+        <?php }
+
+        $countArt=countArticle($db);
+        if($countArt['nbArt']>5) {
+        ?>
         <a class="btn-floating btn-large pulse right red" href="?page=<?php echo $page + 1; ?>"><i
                     class="material-icons">arrow_right</i></a>
 
-    <?php } ?>
+    <?php }} ?>
 </div>
