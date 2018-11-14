@@ -1,5 +1,5 @@
 <?php
-require_once('../protected/info.php');
+require('../protected/info.php');
 
 function connectDB(string $host, string $dbName, string $user, string $pass)
 {
@@ -12,14 +12,7 @@ function connectDB(string $host, string $dbName, string $user, string $pass)
     }
 }
 
-function redirection(string $url)
-{
-    echo '<script language="Javascript">
-           <!--
-                 document.location.replace("' . $url . '");
-           // -->
-     </script>';
-}
+
 
 
 function verifyUsername(PDO $db, string $username)

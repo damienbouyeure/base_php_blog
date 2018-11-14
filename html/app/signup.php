@@ -1,5 +1,6 @@
 <?php
-require_once("./header.php");
+require("../protected/init.php");
+
 $options = ['cost' => 12];
 if (!empty ($_POST['action'])) {
     $username = htmlentities($_POST['username']);
@@ -13,7 +14,7 @@ if (!empty ($_POST['action'])) {
     }
 }
 
-
+require("./header.php");
 ?>
 
 <script type="text/javascript">

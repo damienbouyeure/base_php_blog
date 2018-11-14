@@ -1,5 +1,5 @@
 <?php
-require_once('./header.php');
+require('./header.php');
 $id = $_SESSION['id'];
 $viewArticle = viewUserArticle($db, $id);
 $options = ['cost' => 10];

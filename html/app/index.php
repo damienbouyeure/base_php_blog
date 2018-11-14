@@ -1,5 +1,5 @@
 <?php
-require_once("./header.php");
+require("../protected/init.php");
 
 $page = (!empty($_GET['page']) ? intval($_GET['page']) : 1);
 if ($page < 1) {
@@ -9,8 +9,9 @@ $limite = 5;
 $start = ($page - 1) * $limite;
 $article = viewAllArticle($db, $start, $limite);
 
-
+require("./header.php");
 ?>
+
 <div class="row"></div>
 <div class="container">
     <?php

@@ -1,7 +1,9 @@
 <?php
-require_once("./header.php");
 
-
+require("../protected/init.php");
+/*  Check if the GET id and the id is better than zero;
+    After I checking if the button submit is good, is good I insert the comment
+ */
 if (!empty($_GET['id'] && intval($_GET['id']) > 0)) {
     if (!empty($_POST['comment'])) {
         $username = htmlentities($_POST['username']);
@@ -13,6 +15,7 @@ if (!empty($_GET['id'] && intval($_GET['id']) > 0)) {
     $id = strip_tags($_GET['id']);
     $article = viewArticle($db, $id);
     $comment = viewComment($db, $id);
+    require("./header.php");
     ?>
     <div class="row"></div>
     <div class="container">
@@ -105,5 +108,6 @@ if (!empty($_GET['id'] && intval($_GET['id']) > 0)) {
         });
     </script>
 <?php } else {
-    redirection('https://www.youtube.com/watch?v=ZcBNxuKZyN4');
+   header('location:https://www.youtube.com/watch?v=ZcBNxuKZyN4');
+   exit;
 } ?>

@@ -1,6 +1,6 @@
 <?php
-require_once("./header.php");
 
+require("../protected/init.php");
 if (!empty($_POST['create'])) {
 
 
@@ -13,7 +13,9 @@ if (!empty($_POST['create'])) {
 }
 
 
-if (!empty($_SESSION['username'])) { ?>
+if (!empty($_SESSION['username'])) {
+    require("./header.php");
+    ?>
     <div class="row"></div>
     <div class="container">
 
@@ -76,5 +78,6 @@ if (!empty($_SESSION['username'])) { ?>
 
 
 <?php } else {
-    redirection('https://www.youtube.com/watch?v=ZcBNxuKZyN4');
+    header('location:https://www.youtube.com/watch?v=ZcBNxuKZyN4');
+    exit;
 } ?>
