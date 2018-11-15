@@ -95,5 +95,4 @@ if (!empty($_SESSION['username'])) {
 
 <?php } else {
     header('location:https://www.youtube.com/watch?v=ZcBNxuKZyN4');
-    exit;
 } ?>

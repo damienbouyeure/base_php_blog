@@ -1,5 +1,5 @@
 <?php
-require('./header.php');
+require("../protected/init.php");
 $id = $_SESSION['id'];
 $viewArticle = viewUserArticle($db, $id);
 $options = ['cost' => 10];
@@ -11,14 +11,15 @@ if (!empty($_SESSION['username'])) {
         if (password_verify($verify, $delete)) {
             $id = $_GET['id'];
             deleteArticle($db, $id);
-            redirection('./dashboard.php');
+            header('location:./dashboard.php');
 
         } else {
-            redirection('https://www.youtube.com/watch?v=ZcBNxuKZyN4');
+            header('location:https://www.youtube.com/watch?v=ZcBNxuKZyN4');
+
         }
     }
 
-
+    require('./header.php');
     ?>
     <div class="container">
     <div class="col s8">

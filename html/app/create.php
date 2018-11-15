@@ -2,14 +2,13 @@
 
 require("../protected/init.php");
 if (!empty($_POST['create'])) {
-
-
     $title = htmlentities($_POST['title']);
     $content = htmlentities($_POST['content']);
     $image = deplaceImg($_FILES['img']);
     $id = $_SESSION['id'];
     insertArticle($db, $title, $content, $image, $id);
-    redirection('./');
+    header('location:./');
+    exit;
 }
 
 
@@ -79,5 +78,5 @@ if (!empty($_SESSION['username'])) {
 
 <?php } else {
     header('location:https://www.youtube.com/watch?v=ZcBNxuKZyN4');
-    exit;
+
 } ?>

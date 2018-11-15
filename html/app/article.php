@@ -109,5 +109,5 @@ if (!empty($_GET['id'] && intval($_GET['id']) > 0)) {
     </script>
 <?php } else {
    header('location:https://www.youtube.com/watch?v=ZcBNxuKZyN4');
-   exit;
+
 } ?>

@@ -1,6 +1,9 @@
 <?php
 require("../protected/init.php");
-
+if(!empty($_SESSION['username']))
+{
+    header("location:./");
+}
 $options = ['cost' => 12];
 if (!empty ($_POST['action'])) {
     $username = htmlentities($_POST['username']);
