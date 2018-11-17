@@ -8,7 +8,12 @@ if ($page < 1) {
 $limite = 5;
 $start = ($page - 1) * $limite;
 $article = viewAllArticle($db, $start, $limite);
+$countArt = countArticle($db);
+if ($_GET['page'] > ($countArt['nbArt'] / $limite) + 1) {
 
+    header('location:./');
+    exit;
+}
 require("./header.php");
 ?>
 
@@ -36,7 +41,8 @@ require("./header.php");
                         </div>
 
                         <div class="card-action center-align">
-                            <a class="btn pink pulse" href="article.php?id=<?= intval($article[$i]['id']); ?>">Voir plus</a>
+                            <a class="btn pink pulse" href="article.php?id=<?= intval($article[$i]['id']); ?>">Voir
+                                plus</a>
                         </div>
                     </div>
                     <?php if (($i % 2) == 1) { ?>
@@ -58,11 +64,12 @@ require("./header.php");
 
         <?php }
 
-        $countArt=countArticle($db);
-        if($countArt['nbArt']>5*$start) {
-        ?>
-        <a class="btn-floating btn-large pulse right red" href="?page=<?php echo $page + 1; ?>"><i
-                    class="material-icons">arrow_right</i></a>
 
-    <?php }} ?>
+        if ($countArt['nbArt'] >$limite * $start) {
+            ?>
+            <a class="btn-floating btn-large pulse right red" href="?page=<?php echo $page + 1; ?>"><i
+                        class="material-icons">arrow_right</i></a>
+
+        <?php }
+    } ?>
 </div>

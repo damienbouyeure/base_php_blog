@@ -1,7 +1,7 @@
 <?php
 require('../protected/info.php');
 
-function connectDB(string $host, string $dbName, string $user, string $pass)
+function connectDB(string $host, string $dbName, string $user, string $pass): PDO
 {
     try {
 
@@ -13,9 +13,7 @@ function connectDB(string $host, string $dbName, string $user, string $pass)
 }
 
 
-
-
-function verifyUsername(PDO $db, string $username)
+function verifyUsername(PDO $db, string $username): bool
 {
     $sttVerify = $db->prepare('select username from users where username=:username');
     $sttVerify->bindParam(':username', $username);
@@ -51,37 +49,41 @@ function userConnect(PDO $db, string $username, string $password)
     }
 
 }
-function countArticle (PDO $db)
+
+function countArticle(PDO $db): array
 {
-    $sttCountArt= $db->query("select count(*) as nbArt from articles");
+    $sttCountArt = $db->query("select count(*) as nbArt from articles");
     return $sttCountArt->fetch(PDO::FETCH_ASSOC);
 }
-function viewAllArticle(PDO $db, int $start, int $limit)
+
+function viewAllArticle(PDO $db, int $start, int $limit): array
 {
     $sttViewAll = $db->prepare('select a.id, title,content,image,username from articles a left join users u on a.author = u.id order by a.id DESC limit :start,:limit  ');
     $sttViewAll->bindParam(':limit', $limit, PDO::PARAM_INT);
     $sttViewAll->bindParam(':start', $start, PDO::PARAM_INT);
     $sttViewAll->execute();
     $viewAll = $sttViewAll->fetchAll(PDO::FETCH_ASSOC);
-    return (array) $viewAll;
+    return $viewAll;
 }
 
-function viewArticle(PDO $db, int $id)
+function viewArticle(PDO $db, int $id): array
 {
     $sttViewArt = $db->prepare('select a.id, title,content,image,username from articles a left join users u on a.author = u.id where a.id=:id ');
     $sttViewArt->bindParam(':id', $id, PDO::PARAM_INT);
     $sttViewArt->execute();
     $viewArt = $sttViewArt->fetch(PDO::FETCH_ASSOC);
-    return (array)$viewArt;
+    return $viewArt;
 }
-function viewUserArticle(PDO $db, int $id)
+
+function viewUserArticle(PDO $db, int $id): array
 {
     $sttViewUserArt = $db->prepare('select a.id, title,a.content,image from articles a  where a.author=:id ');
     $sttViewUserArt->bindParam(':id', $id, PDO::PARAM_INT);
     $sttViewUserArt->execute();
     $viewUserArt = $sttViewUserArt->fetchAll(PDO::FETCH_ASSOC);
-    return (array) $viewUserArt;
+    return $viewUserArt;
 }
+
 function viewComment(PDO $db, int $id)
 {
     $sttViewComment = $db->prepare('select c.id,a.id,c.content, username  from articles a right join comments c on a.id = c.article where a.id=:id ');
@@ -100,13 +102,16 @@ function insertComment(PDO $db, string $username, string $content, int $article)
 
 }
 
-function deplaceImg(array $file)
+function deplaceImg(array $file): string
 {
+
     $uploads_dir = './img/';
     $tmp_name = $file['tmp_name'];
     $name = uniqid() . '-' . $file['name'];
     move_uploaded_file($tmp_name, "$uploads_dir/$name");
     return $name;
+
+
 }
 
 function insertArticle(PDO $db, string $title, string $content, string $image, int $author)
@@ -119,14 +124,15 @@ function insertArticle(PDO $db, string $title, string $content, string $image, i
     $sttInsertArt->execute();
 
 }
+
 function deleteArticle(PDO $db, int $id)
 {
     $sttDeleteArt = $db->prepare('delete from articles where id=:id');
-    $sttDeleteArt->bindParam(':id',$id, PDO::PARAM_INT);
+    $sttDeleteArt->bindParam(':id', $id, PDO::PARAM_INT);
     $sttDeleteArt->execute();
 }
 
-function editArticle(PDO $db, string $title, string $content, string $image,int $id)
+function editArticle(PDO $db, string $title, string $content, string $image, int $id)
 {
     $sttEditArt = $db->prepare('update articles set title=:title,content=:content, image=:image where id=:id');
     $sttEditArt->bindParam(':title', $title);

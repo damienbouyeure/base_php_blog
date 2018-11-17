@@ -9,6 +9,7 @@ if (!empty($_POST['create'])) {
     insertArticle($db, $title, $content, $image, $id);
     header('location:./');
     exit;
+
 }
 
 
@@ -49,20 +50,22 @@ if (!empty($_SESSION['username'])) {
                                 <div class="file-path-wrapper">
                                     <input class="file-path validate" type="text">
                                 </div>
+
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s3">
                             <a class="btn btn-small btn-register waves-effect waves-light center red pulse" href="./">Annuler
-                            <i class="material-icons right">cancel</i>
+                                <i class="material-icons right">cancel</i>
                             </a>
                         </div>
                         <div class="input-field col s6">
                             &nbsp;
                         </div>
                         <div class="input-field col s3">
-                            <button class="btn btn-small btn-register waves-effect waves-light right purple pulse" type="submit" name="create" value="1">
+                            <button class="btn btn-small btn-register waves-effect waves-light right purple pulse"
+                                    type="submit" name="create" value="1">
                                 Créer
                                 <i class="material-icons right">done</i>
                             </button>
